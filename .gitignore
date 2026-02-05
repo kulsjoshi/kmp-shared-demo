@@ -25,3 +25,11 @@ Pods/
 
 # macOS
 .DS_Store
+
+# iOS (Xcode)
+DerivedData/
+*.xcuserstate
+*.xcuserdata/
+
+# Never commit built frameworks
+*.framework
