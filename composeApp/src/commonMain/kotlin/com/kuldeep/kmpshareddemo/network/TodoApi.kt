@@ -8,9 +8,14 @@ import io.ktor.client.request.get
 class TodoApi(
     private val client: HttpClient
 ) {
-    suspend fun fetchTodo(): Todo {
+    suspend fun fetchTodo(id: Int): Todo {
         return client
-            .get("https://jsonplaceholder.typicode.com/todos/10")
+            .get(urlString = "https://jsonplaceholder.typicode.com/todos/${id}")
+            .body()
+    }
+    suspend fun fetchTodos(): List<Todo>{
+        return client
+            .get(urlString = "https://jsonplaceholder.typicode.com/todos")
             .body()
     }
 }

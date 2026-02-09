@@ -19,5 +19,5 @@ import com.kuldeep.kmpshareddemo.data.TodoRepository
 class GetTodoUseCase(
     private val repository: TodoRepository
 ) {
-    operator fun invoke() = repository.getTodo()
+    operator fun invoke(id: Int = 1) = repository.getTodo(id)
 }

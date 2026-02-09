@@ -20,7 +20,11 @@ import kotlinx.coroutines.flow.flow
  * “Repository abstracts data sources and exposes flows.”
  */
 class TodoRepository(private val api: TodoApi) {
-    fun getTodo(): Flow<Todo> = flow {
-        emit(value = api.fetchTodo())
+    fun getTodo(id: Int): Flow<Todo> = flow {
+        emit(value = api.fetchTodo(id))
+    }
+
+    fun getTodos():Flow<List<Todo>> = flow{
+        emit(value = api.fetchTodos())
     }
 }

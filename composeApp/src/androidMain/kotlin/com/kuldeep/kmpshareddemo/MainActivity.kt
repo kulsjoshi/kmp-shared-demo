@@ -35,7 +35,8 @@ class MainActivity : ComponentActivity() {
 
 
         setContent {
-            ShowToDoListPreview()
+            App()
+//            ShowToDoListPreview()
         }
     }
 }

@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kuldeep.kmpshareddemo.data.TodoRepository
 import com.kuldeep.kmpshareddemo.domain.GetTodoUseCase
+import com.kuldeep.kmpshareddemo.domain.GetTodosUseCase
 import com.kuldeep.kmpshareddemo.network.HttpClientFactory
 import com.kuldeep.kmpshareddemo.network.TodoApi
 import com.kuldeep.kmpshareddemo.presentation.TodoPresenter
@@ -17,15 +18,23 @@ class TodoViewModel : ViewModel() {
                     client = HttpClientFactory.create()
                 )
             )
-        ), viewModelScope
+        ),
+        GetTodosUseCase(
+            repository = TodoRepository(
+                api = TodoApi(
+                    client = HttpClientFactory.create()
+                )
+            )
+        ),
+        viewModelScope = viewModelScope
     )
 
     val state = todoPresenter.state
 
     init {
-        todoPresenter.load()
+        todoPresenter.loadTodo()
     }
 
-    fun retry() = todoPresenter.retry()
+    fun retry() = todoPresenter.retryTodo()
 
 }

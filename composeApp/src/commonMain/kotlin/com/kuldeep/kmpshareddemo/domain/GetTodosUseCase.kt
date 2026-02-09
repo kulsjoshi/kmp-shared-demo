@@ -1,4 +1,9 @@
 package com.kuldeep.kmpshareddemo.domain
 
-class GetTodosUseCase {
+import com.kuldeep.kmpshareddemo.data.TodoRepository
+
+class GetTodosUseCase(
+    private val repository: TodoRepository
+) {
+    operator fun invoke() = repository.getTodos()
 }

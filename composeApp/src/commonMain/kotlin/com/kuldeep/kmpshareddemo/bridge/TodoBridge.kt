@@ -2,6 +2,7 @@ package com.kuldeep.kmpshareddemo.bridge
 
 import com.kuldeep.kmpshareddemo.data.TodoRepository
 import com.kuldeep.kmpshareddemo.domain.GetTodoUseCase
+import com.kuldeep.kmpshareddemo.domain.GetTodosUseCase
 import com.kuldeep.kmpshareddemo.model.Todo
 import com.kuldeep.kmpshareddemo.network.HttpClientFactory
 import com.kuldeep.kmpshareddemo.network.TodoApi
@@ -16,20 +17,21 @@ import kotlinx.coroutines.flow.onEach
 
 class TodoBridge {
     private val scope: CoroutineScope = MainScope()
+    private val httpClient = HttpClientFactory.create()
+    private val todoApi = TodoApi(httpClient)
+    private val repository = TodoRepository(todoApi)
 
     private val presenter = TodoPresenter(
-        getTodo = GetTodoUseCase(
-            TodoRepository(
-                TodoApi(HttpClientFactory.create())
-            )
-        ),
+        getTodo = GetTodoUseCase(repository = repository),
+        getTodosUseCase = GetTodosUseCase(repository = repository),
         viewModelScope = scope
     )
 
     val state: StateFlow<ApiState<Todo>> = presenter.state
+    val stateTodoList: StateFlow<ApiState<List<Todo>>> = presenter.stateTodoList
 
-    fun load() = presenter.load()
-    fun retry() = presenter.retry()
+    fun loadTodo() = presenter.loadTodo()
+    fun retryTodo() = presenter.retryTodo()
 
     /**
      * Swift-friendly observer:
@@ -37,19 +39,53 @@ class TodoBridge {
      * - onSuccess(title)
      * - onError(message)
      */
-    fun observe(
+    fun observeTodo(
         onLoading: (Boolean) -> Unit,
         onSuccess: (String) -> Unit,
         onError: (String) -> Unit
     ): com.kuldeep.kmpshareddemo.bridge.Closeable {
 
         val currentState = presenter.state.onEach { state ->
-            when(state){
+            when (state) {
                 is ApiState.Loading -> onLoading(true)
                 is ApiState.Success<Todo> -> {
                     onLoading(false)
                     onSuccess(state.data.title)
                 }
+
+                is ApiState.Error -> {
+                    onLoading(false)
+                    onError(state.message)
+                }
+            }
+        }.launchIn(scope)
+
+
+        return Closeable {
+            currentState.cancel()
+        }
+    }
+
+    /**
+     * Swift-friendly observer:
+     * - onLoading(true/false)
+     * - onSuccess(title)
+     * - onError(message)
+     */
+    fun observeTodos(
+        onLoading: (Boolean) -> Unit,
+        onSuccess: (List<String>) -> Unit,
+        onError: (String) -> Unit
+    ): com.kuldeep.kmpshareddemo.bridge.Closeable {
+
+        val currentState = presenter.stateTodoList.onEach { state ->
+            when (state) {
+                is ApiState.Loading -> onLoading(true)
+                is ApiState.Success<List<Todo>> -> {
+                    onLoading(false)
+                    onSuccess(state.data.map { it.title })
+                }
+
                 is ApiState.Error -> {
                     onLoading(false)
                     onError(state.message)
