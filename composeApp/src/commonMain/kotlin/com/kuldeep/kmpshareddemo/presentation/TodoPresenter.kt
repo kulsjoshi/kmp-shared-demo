@@ -67,5 +67,4 @@ class TodoPresenter(
 
     fun retryTodo() = loadTodo()
     fun retryTodoList() = loadTodoList()
-
 }

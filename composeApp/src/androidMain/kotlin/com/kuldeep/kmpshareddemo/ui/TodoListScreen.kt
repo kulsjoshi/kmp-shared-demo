@@ -3,6 +3,7 @@ package com.kuldeep.kmpshareddemo.ui
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.slideInVertically
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -18,7 +19,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.RadioButtonUnchecked
 import androidx.compose.material3.Button
@@ -31,7 +31,6 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
@@ -53,7 +52,8 @@ import com.kuldeep.kmpshareddemo.utils.ApiState
 @Composable
 fun TodoListScreen(
     todoPresenter: TodoPresenter,
-    onBack: () -> Unit
+    onBack: () -> Unit,
+    onTodoClick: (Todo) -> Unit
 ) {
     val state by todoPresenter.stateTodoList.collectAsState()
 
@@ -118,7 +118,9 @@ fun TodoListScreen(
                             ) {
                                 TodoCard(
                                     todo,
-                                    modifier = Modifier.fillMaxWidth()
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .clickable { onTodoClick(todo) }
                                 )
                             }
                         }

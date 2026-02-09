@@ -11,12 +11,14 @@ import com.kuldeep.kmpshareddemo.ui.TodoListScreen
 import com.kuldeep.kmpshareddemo.ui.rememberTodoPresenter
 import com.kuldeep.kmpshareddemo.ui.utils.HomeScreen
 import com.kuldeep.kmpshareddemo.ui.utils.Screen
+import com.kuldeep.kmpshareddemo.ui.TodoDetailsScreen
 
 @Composable
 @Preview
 fun App() {
     MaterialTheme {
         var screen by remember { mutableStateOf<Screen>(Screen.Home) }
+        val presenter = rememberTodoPresenter()
 
         when (screen) {
 
@@ -27,9 +29,21 @@ fun App() {
             }
 
             Screen.TodoList -> TodoListScreen(
-                todoPresenter = rememberTodoPresenter(),
-                onBack = { screen = Screen.Home }
+                todoPresenter = presenter,
+                onBack = { screen = Screen.Home },
+                onTodoClick = { todo ->
+                    screen = Screen.TodoDetails(todo)
+                }
             )
+
+            is Screen.TodoDetails -> {
+                val todo = (screen as Screen.TodoDetails).todo
+                TodoDetailsScreen(
+                    onBack = { screen = Screen.TodoList },
+                    todo = todo
+                )
+            }
+
         }
     }
 }
