@@ -7,8 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AD63AF692F351B4C00FF3F07 /* ComposeApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD63AF682F351B4C00FF3F07 /* ComposeApp.framework */; };
-		AD63AF6A2F351B4C00FF3F07 /* ComposeApp.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AD63AF682F351B4C00FF3F07 /* ComposeApp.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		AD0F992B2F3B96E5005FE7E8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD0F99222F3B96E5005FE7E8 /* Assets.xcassets */; };
+		AD0F992C2F3B96E5005FE7E8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0F99232F3B96E5005FE7E8 /* ContentView.swift */; };
+		AD0F992E2F3B96E5005FE7E8 /* KMPSharedDemoIOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0F99252F3B96E5005FE7E8 /* KMPSharedDemoIOSApp.swift */; };
+		ADEE7AB32F3BA36600565BEF /* ComposeApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADEE7AB22F3BA36600565BEF /* ComposeApp.framework */; };
+		ADEE7AB42F3BA36600565BEF /* ComposeApp.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = ADEE7AB22F3BA36600565BEF /* ComposeApp.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -18,7 +21,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				AD63AF6A2F351B4C00FF3F07 /* ComposeApp.framework in Embed Frameworks */,
+				ADEE7AB42F3BA36600565BEF /* ComposeApp.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -26,15 +29,22 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		AD0F99222F3B96E5005FE7E8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		AD0F99232F3B96E5005FE7E8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		AD0F99252F3B96E5005FE7E8 /* KMPSharedDemoIOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMPSharedDemoIOSApp.swift; sourceTree = "<group>"; };
 		AD63AF522F35005500FF3F07 /* KMPSharedDemoIOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KMPSharedDemoIOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		AD63AF612F35047500FF3F07 /* ComposeApp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ComposeApp.framework; path = ../KMPSharedDemo/composeApp/build/bin/iosSimulatorArm64/debugFramework/ComposeApp.framework; sourceTree = "<group>"; };
-		AD63AF682F351B4C00FF3F07 /* ComposeApp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ComposeApp.framework; path = ../KMPSharedDemo/composeApp/build/bin/iosX64/debugFramework/ComposeApp.framework; sourceTree = "<group>"; };
+		ADEE7AB22F3BA36600565BEF /* ComposeApp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ComposeApp.framework; path = ../composeApp/build/bin/iosX64/debugFramework/ComposeApp.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		AD63AF542F35005500FF3F07 /* KMPSharedDemoIOS */ = {
+		AD0F99322F3B96EC005FE7E8 /* ViewModel */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = KMPSharedDemoIOS;
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		AD0F99332F3B96F5005FE7E8 /* Ui */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Ui;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -44,19 +54,31 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AD63AF692F351B4C00FF3F07 /* ComposeApp.framework in Frameworks */,
+				ADEE7AB32F3BA36600565BEF /* ComposeApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AD0F99292F3B96E5005FE7E8 /* KMPSharedDemoIOS */ = {
+			isa = PBXGroup;
+			children = (
+				AD0F99332F3B96F5005FE7E8 /* Ui */,
+				AD0F99322F3B96EC005FE7E8 /* ViewModel */,
+				AD0F99222F3B96E5005FE7E8 /* Assets.xcassets */,
+				AD0F99232F3B96E5005FE7E8 /* ContentView.swift */,
+				AD0F99252F3B96E5005FE7E8 /* KMPSharedDemoIOSApp.swift */,
+			);
+			path = KMPSharedDemoIOS;
+			sourceTree = "<group>";
+		};
 		AD63AF492F35005500FF3F07 = {
 			isa = PBXGroup;
 			children = (
-				AD63AF542F35005500FF3F07 /* KMPSharedDemoIOS */,
 				AD63AF602F35047400FF3F07 /* Frameworks */,
 				AD63AF532F35005500FF3F07 /* Products */,
+				AD0F99292F3B96E5005FE7E8 /* KMPSharedDemoIOS */,
 			);
 			sourceTree = "<group>";
 		};
@@ -71,8 +93,7 @@
 		AD63AF602F35047400FF3F07 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				AD63AF682F351B4C00FF3F07 /* ComposeApp.framework */,
-				AD63AF612F35047500FF3F07 /* ComposeApp.framework */,
+				ADEE7AB22F3BA36600565BEF /* ComposeApp.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -94,7 +115,8 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				AD63AF542F35005500FF3F07 /* KMPSharedDemoIOS */,
+				AD0F99322F3B96EC005FE7E8 /* ViewModel */,
+				AD0F99332F3B96F5005FE7E8 /* Ui */,
 			);
 			name = KMPSharedDemoIOS;
 			packageProductDependencies = (
@@ -142,6 +164,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD0F992B2F3B96E5005FE7E8 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -152,6 +175,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD0F992C2F3B96E5005FE7E8 /* ContentView.swift in Sources */,
+				AD0F992E2F3B96E5005FE7E8 /* KMPSharedDemoIOSApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

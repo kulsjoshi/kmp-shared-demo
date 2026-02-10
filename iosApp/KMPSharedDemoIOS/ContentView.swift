@@ -13,23 +13,24 @@ struct ContentView: View {
     @StateObject private var viewModel = TodoViewModel()
     
     var body: some View{
-        VStack(spacing: 12){
-            if viewModel.isLoading{
-                ProgressView()
-            } else if let error = viewModel.error {
-                Text("Error: \(error)")
-                Button("Retry"){
-                    viewModel.retry()
-                }
-            } else {
-                Text(viewModel.title.isEmpty ? "No data" : viewModel.title)
-            }
-
-        }
-        .padding()
-        .onAppear{
-            viewModel.start()
-        }
+        HomeView()
+//        VStack(spacing: 12){
+//            if viewModel.isLoading{
+//                ProgressView()
+//            } else if let error = viewModel.error {
+//                Text("Error: \(error)")
+//                Button("Retry"){
+//                    viewModel.retry()
+//                }
+//            } else {
+//                Text(viewModel.title.isEmpty ? "No data" : viewModel.title)
+//            }
+//
+//        }
+//        .padding()
+//        .onAppear{
+//            viewModel.start()
+//        }
     }
 }
 

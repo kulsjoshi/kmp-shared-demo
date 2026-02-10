@@ -33,6 +33,10 @@ class TodoBridge {
     fun loadTodo() = presenter.loadTodo()
     fun retryTodo() = presenter.retryTodo()
 
+    fun loadTodos() = presenter.loadTodoList()
+    fun retryTodos() = presenter.retryTodoList()
+
+
     /**
      * Swift-friendly observer:
      * - onLoading(true/false)
@@ -74,7 +78,7 @@ class TodoBridge {
      */
     fun observeTodos(
         onLoading: (Boolean) -> Unit,
-        onSuccess: (List<String>) -> Unit,
+        onSuccess: (List<Todo>) -> Unit,
         onError: (String) -> Unit
     ): com.kuldeep.kmpshareddemo.bridge.Closeable {
 
@@ -83,7 +87,7 @@ class TodoBridge {
                 is ApiState.Loading -> onLoading(true)
                 is ApiState.Success<List<Todo>> -> {
                     onLoading(false)
-                    onSuccess(state.data.map { it.title })
+                    onSuccess(state.data)
                 }
 
                 is ApiState.Error -> {
